@@ -4,7 +4,7 @@ provider "aws" {
 
 locals {
   name   = "bti-staging"
-  region = "us-east-1"
+  region = "us-west-2"
   tags = {
     Owner       = "juyel"
     Environment = "dev"
@@ -44,7 +44,8 @@ module "db" {
   name                  = local.name
   engine                = "aurora-mysql"
   engine_version        = "5.7.12"
-  
+  instance_type         = "db.r5.large"
+  instance_type_replica = "db.r5.large"
 
   vpc_id                = module.vpc.vpc_id
   db_subnet_group_name  = module.vpc.database_subnet_group_name
